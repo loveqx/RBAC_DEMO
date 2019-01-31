@@ -1,0 +1,46 @@
+{% extends 'rbac/base.html' %}
+
+{% block con %}
+
+    <h4>书籍列表</h4>
+
+
+    {% if per.add %}
+        <a href="/books/add/" style="float:right" class="btn btn-primary">添加书籍</a>
+    {% endif %}
+
+    <table class="table table-bordered table-striped">
+    <thead>
+              <tr>
+                   <th>序号</th>
+                   <th>书名</th>
+                   <th>作者</th>
+                   <th>操作</th>
+              </tr>
+        </thead>
+       <tbody>
+            {% for book in book_list %}
+            <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td>{{ book.title }}</td>
+                 <td>{{ book.author }}</td>
+                 <td>
+                     {% if per.delete %}
+                          <a href="/books/delete/{{ user.pk }}" class="btn btn-danger">删除</a>
+                     {% endif %}
+
+                     {% if per.edit %}
+                           <a href="/books/edit/{{ user.pk }}" class="btn btn-warning">编辑</a>
+                     {% endif %}
+
+                 </td>
+            </tr>
+            {% endfor %}
+
+       </tbody>
+    </table>
+
+
+
+{% endblock %}
+
